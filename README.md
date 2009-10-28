@@ -7,10 +7,8 @@ Features
 The django-ccss module has the following features:
 
  * Generate CSS from templates using any valid Django template loader
- 
      * This includes files, app templates, eggs, etc
      * The loading order is the same as for any normal Django template
-   
  * Automatically regenerate CSS using the development server (ccssrun command)
  * Manually generate CSS using the ccss command
  * Requires no database tables, custom views or extra caching
@@ -23,15 +21,11 @@ Installation of the django-ccss module is incredibly easy!
  1. Download the source to your Django app as 'ccss'
  1. Add 'ccss' to your INSTALLED_APPS in settings.py
  1. Create CleverCSS templates in any template directory
- 
      * By default you must put the files under the styles directory (see settings)
      * You must name the templates with a .ccss extension
      * You may use any number of subfolders to organize your templates
-   
  1. Run the development server with ./manage.py ccssrun
- 
      * The syntax is identical to ./manage.py runserver
-   
  1. Whenever you update your production servers, run ./manage.py ccss
 
 Your CSS files will be in your MEDIA_ROOT under the styles directory by default.
