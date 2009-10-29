@@ -18,7 +18,7 @@ Installation & Overview
 -----------------------
 Installation of the django-ccss module is incredibly easy!
 
- 1. Download the source to your Django app as 'ccss'
+ 1. Download the source to your Django project as 'ccss'
  1. Add 'ccss' to your INSTALLED_APPS in settings.py
  1. Create CleverCSS templates in any template directory
      * By default you must put the files under the styles directory (see settings)
@@ -56,20 +56,27 @@ Quick Example
 Still a bit confused? Here's a quick and dirty example. After adding 'ccss' to your INSTALLED_APPS create a 'templates' directory in the same location as this file you are currently reading. Inside of that directory create a 'styles' directory. Inside of there, create a file named test.ccss and put the following into it:
 
     basecolor = red;
-    
+
     body:
         color: white
         background-color: black
-    
+
     a:
         color: $basecolor
         text-decoration: underline
-        
+
         &:hover:
             color: $basecolor.brighten(30)
             text-decoration: underline
-    
+
 Then run ./manage.py ccss and take a look in your MEDIA_ROOT at styles/test.css. That file can now be included like normal in your Django templates. When you've created a default view and base template that includes the CSS file, you can run ./manage.py runserver and go to http://localhost:8000/ in your browser like normal. Anytime you update your test.ccss file the test.css file will be automatically regenerated, all you need to do is hit refresh in your browser. When you deploy to a production server and no longer use the development server, use ./manage.py ccss to regenerate outdated CSS files.
+
+Alternatives
+------------
+Several alternatives exist which provide similar functionality in different ways. While I believe they are more complex, more difficult to setup, and more difficult to use you may find that they are exactly what you need.
+
+ * <a href="http://code.google.com/p/django-clevercss/">django-clevercss</a>
+ * <a href="http://github.com/dziegler/django-css">django-css</a>
 
 License
 -------
@@ -92,4 +99,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
