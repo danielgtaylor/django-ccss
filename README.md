@@ -9,8 +9,8 @@ The django-ccss module has the following features:
  * Generate CSS from templates using any valid Django template loader
      * This includes files, app templates, eggs, etc
      * The loading order is the same as for any normal Django template
- * Automatically regenerate CSS using the development server (ccssrun command)
- * Manually generate CSS using the ccss command
+ * Automatically regenerate CSS using the development server
+ * Manually generate CSS using the 'ccss' command
  * Requires no database tables, custom views or extra caching
  * The only dependency is Django itself
 
@@ -24,8 +24,7 @@ Installation of the django-ccss module is incredibly easy!
      * By default you must put the files under the styles directory (see settings)
      * You must name the templates with a .ccss extension
      * You may use any number of subfolders to organize your templates
- 1. Run the development server with ./manage.py ccssrun
-     * The syntax is identical to ./manage.py runserver
+ 1. Run the development server with ./manage.py runserver
  1. Whenever you update your production servers, run ./manage.py ccss
 
 Your CSS files will be in your MEDIA_ROOT under the styles directory by default.
@@ -70,7 +69,7 @@ Still a bit confused? Here's a quick and dirty example. After adding 'ccss' to y
             color: $basecolor.brighten(30)
             text-decoration: underline
     
-Then run ./manage.py ccss and take a look in your MEDIA_ROOT at styles/test.css. That file can now be included like normal in your Django templates. When you've created a default view and base template that includes the CSS file, you can run ./manage.py ccssrun and go to http://localhost:8000/ in your browser like normal. Anytime you update your test.ccss file the test.css file will be automatically regenerated, all you need to do is hit refresh in your browser.
+Then run ./manage.py ccss and take a look in your MEDIA_ROOT at styles/test.css. That file can now be included like normal in your Django templates. When you've created a default view and base template that includes the CSS file, you can run ./manage.py runserver and go to http://localhost:8000/ in your browser like normal. Anytime you update your test.ccss file the test.css file will be automatically regenerated, all you need to do is hit refresh in your browser. When you deploy to a production server and no longer use the development server, use ./manage.py ccss to regenerate outdated CSS files.
 
 License
 -------
