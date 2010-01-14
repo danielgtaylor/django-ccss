@@ -422,7 +422,7 @@ _number_re = re.compile(_r_number + '(?![a-zA-Z0-9_])')
 _value_re = re.compile(r'(%s)(%s)(?![a-zA-Z0-9_])' % (_r_number, '|'.join(_units)))
 _color_re = re.compile(r'#' + ('[a-fA-f0-9]{1,2}' * 3))
 _string_re = re.compile('%s|([^\s*/();,.+$]+|\.(?!%s))+' % (_r_string, _r_call))
-_url_re = re.compile(r'url\(\s*(%s|.*?)\s*\)' % _r_string)
+_url_re = re.compile(r'url\(\s*(.*?)\s*\)')
 _var_re = re.compile(r'(?<!\\)\$(?:([a-zA-Z_][a-zA-Z0-9_]*)|'
                      r'\{([a-zA-Z_][a-zA-Z0-9_]*)\})')
 _call_re = re.compile(r'\.' + _r_call)
@@ -1349,7 +1349,7 @@ class Parser(object):
         return result, real_vars
 
     def parse_expr(self, lineno, s):
-        def parse():
+        def parse(lineno, s):
             pos = 0
             end = len(s)
 
@@ -1380,20 +1380,26 @@ class Parser(object):
                      (_string_re, process_string),
                      (_var_re, lambda m: (m.group(1) or m.group(2), 'var')),
                      (_whitespace_re, None))
-
+            
             while pos < end:
                 for rule, processor in rules:
                     m = rule.match(s, pos)
                     if m is not None:
                         if processor is not None:
-                            yield processor(m)
+                            if rule == _url_re:
+                                yield (u"url(", "string")
+                                for x in parse(lineno, s[m.start() + 4:m.end() - 1]):
+                                    yield x
+                                yield (u")", "string")
+                            else:
+                                yield processor(m)
                         pos = m.end()
                         break
                 else:
                     raise ParserError(lineno, 'Syntax error')
 
         s = s.rstrip(';')
-        return self.expr(TokenStream(lineno, parse()))
+        return self.expr(TokenStream(lineno, parse(lineno, s)))
 
     def expr(self, stream, ignore_comma=False):
         args = [self.concat(stream)]
