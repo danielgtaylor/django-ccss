@@ -1025,6 +1025,10 @@ class Color(Literal):
 
     def to_string(self, context):
         code = '#%02x%02x%02x' % self.value
+        
+        if code[1] == code[2] and code[3] == code[4] and code[5] == code[6]:
+            code = code[0] + code[1] + code[3] + code[4]
+        
         return self.from_name and _reverse_colors.get(code) or code
 
     def _calc(self, other, method):
