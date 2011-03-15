@@ -69,7 +69,8 @@ class Command(BaseCommand):
                 # Walk the path and recursively find all CleverCSS templates
                 for root, dirs, files in os.walk(path):
                     # Filter out any other files we don't care about
-                    for template in [f for f in files if f.endswith(".ccss")]:
+                    for template in [f for f in files if f.endswith(".ccss") \
+                                         and not f.startswith(".#")]:
                         # The directory relative to the template + css path
                         # root
                         reldir = os.path.dirname(os.path.join(root,
