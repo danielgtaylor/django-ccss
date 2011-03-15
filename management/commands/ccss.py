@@ -11,7 +11,8 @@ from optparse import make_option
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
-from django.template.loader import find_template_source
+from django.template import Context
+from django.template.loader import find_template
 from django.template.loaders.app_directories import app_template_dirs
 
 from ... import conf
@@ -102,13 +103,14 @@ class Command(BaseCommand):
             outfile = os.path.join(outpath, base + ".css")
 
             # Retrieve the template source through Django's template loader
-            source, info = find_template_source(infile)
+            source, info = find_template(infile)
 
             # Make sure the output path exists, then write the generated CSS
             if not os.path.exists(os.path.dirname(outfile)):
                 os.makedirs(os.path.dirname(outfile))
 
-            open(outfile, "w").write(convert(source))
+            c = Context({})
+            open(outfile, "w").write(convert(source.render(c)))
 
             if verbosity > 0:
                 print "Generated %s.css" % base
