@@ -47,7 +47,7 @@ class Command(BaseCommand):
                                "options!")
 
         # Get the base output path in which to create CSS files
-        outpath = os.path.join(settings.MEDIA_ROOT, conf.CSS_PATH)
+        outpath = os.path.join(settings.MEDIA_ROOT, conf.CSS_OUT_PATH)
 
         if args:
             # Process a specific list of files

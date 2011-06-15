@@ -17,3 +17,4 @@ from django.conf import settings
     named /foo/media/styles/screen.css.
 """
 CSS_PATH = getattr(settings, "CSS_PATH", "styles")
+CSS_OUT_PATH = getattr(settings, "CSS_OUT_PATH", CSS_PATH)
