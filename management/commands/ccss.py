@@ -47,7 +47,7 @@ class Command(BaseCommand):
                                "options!")
 
         # Get the base output path in which to create CSS files
-        outpath = os.path.join(settings.MEDIA_ROOT, conf.CSS_OUT_PATH)
+        outpath = os.path.join(settings.MEDIA_ROOT, conf.CSS_PATH)
 
         if args:
             # Process a specific list of files
@@ -64,7 +64,7 @@ class Command(BaseCommand):
 
             for template_path in settings.TEMPLATE_DIRS + app_template_dirs:
                 # The path in which to look for CleverCSS templates
-                path = os.path.join(template_path, conf.CSS_PATH)
+                path = os.path.join(template_path, conf.CCSS_PATH)
 
                 # Walk the path and recursively find all CleverCSS templates
                 for root, dirs, files in os.walk(path):
@@ -100,7 +100,7 @@ class Command(BaseCommand):
         for entry in filenames:
             # Get path names for input and output files
             base = ".".join(entry.split(".")[:-1])
-            infile = os.path.join(conf.CSS_PATH, base + ".ccss")
+            infile = os.path.join(conf.CCSS_PATH, base + ".ccss")
             outfile = os.path.join(outpath, base + ".css")
 
             # Make sure the output path exists, then write the generated CSS
