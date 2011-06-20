@@ -19,4 +19,4 @@ from django.conf import settings
     By default CCSS_PATH is set to be the same as CSS_PATH
 """
 CSS_PATH = getattr(settings, "CSS_PATH", "styles")
-CCSS_PATH = getattr(settings, "CSS_OUT_PATH", CSS_PATH)
+CCSS_PATH = getattr(settings, "CCSS_PATH", CSS_PATH )
