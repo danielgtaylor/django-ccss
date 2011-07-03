@@ -42,6 +42,11 @@ The following settings are available and can be set in your settings.py:
     <tr>
         <td>CSS_PATH</td>
         <td>"styles"</td>
+        <td>The path, relative to your MEDIA_ROOT, to put rendered CSS templates</td>
+    </tr>
+    <tr>
+        <td>CCSS_PATH</td>
+        <td>CSS_PATH</td>
         <td>The path, relative to your TEMPLATE_DIRS, to look for CleverCSS templates</td>
     </tr>
 </table>
